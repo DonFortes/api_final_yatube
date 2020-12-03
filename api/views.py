@@ -38,8 +38,12 @@ class CommentViewSet(viewsets.ModelViewSet):
         serializer.save(author=self.request.user, post=post)
 
 
-class FollowViewSet(mixins.CreateModelMixin, mixins.ListModelMixin,
+class CreateListSet(mixins.CreateModelMixin, mixins.ListModelMixin,
                     viewsets.GenericViewSet):
+    pass
+
+
+class FollowViewSet(CreateListSet):
     serializer_class = FollowSerializer
     permission_classes = [IsAuthenticated, IsOwnerOrReadOnly]
     filter_backends = [filters.SearchFilter]
@@ -54,8 +58,7 @@ class FollowViewSet(mixins.CreateModelMixin, mixins.ListModelMixin,
         return queryset
 
 
-class GroupViewSet(mixins.CreateModelMixin, mixins.ListModelMixin,
-                   viewsets.GenericViewSet):
+class GroupViewSet(CreateListSet):
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
     permission_classes = [IsOwnerOrReadOnly]
