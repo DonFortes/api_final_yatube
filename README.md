@@ -1,2 +1,1 @@
-# api_final
-api final
+Django REST Framework, Social Media Blogging (without GUI)
